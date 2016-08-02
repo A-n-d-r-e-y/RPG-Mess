@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPG Mess.CSharp", "RPG Mess\RPG Mess.CSharp.csproj", "{DA34B133-641A-CD0D-CCDF-897EC5E44EB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{C0573CC1-DC3F-4CEB-9252-BBB64BD882D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA34B133-641A-CD0D-CCDF-897EC5E44EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA34B133-641A-CD0D-CCDF-897EC5E44EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA34B133-641A-CD0D-CCDF-897EC5E44EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA34B133-641A-CD0D-CCDF-897EC5E44EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0573CC1-DC3F-4CEB-9252-BBB64BD882D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0573CC1-DC3F-4CEB-9252-BBB64BD882D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0573CC1-DC3F-4CEB-9252-BBB64BD882D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0573CC1-DC3F-4CEB-9252-BBB64BD882D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
