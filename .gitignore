@@ -1,5 +1,41 @@
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
 
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+Assets/AssetStoreTools*
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# =================================================== #
 # Created by https://www.gitignore.io/api/visualstudio
+# =================================================== #
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
