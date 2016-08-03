@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Code.Common;
 using UnityEngine;
 
-namespace Assets.Code.Components.AI
+namespace Assets.Code.Components
 {
-    //[RequireComponent(typeof(MovingController))]
-    public class SimpleWanderingAI : MonoBehaviour
+    public class RandomInputReceiver : BaseInputReceiver
     {
         // private variables
-        private MovingController movingController;
         double remainingTime = 0;
         DateTime timeStamp;
         Vector2 currentVector;
@@ -22,20 +21,10 @@ namespace Assets.Code.Components.AI
         [SerializeField]
         float dev = 0.3f;
 
-        void Awake()
+        public override event EventHandler<Vector2EventArgs> InputReceived;
+
+        public override void Update()
         {
-            movingController = this.GetComponent<MovingController>();
-        }
-
-        void Start()
-        {
-
-        }
-
-        void Update()
-        {
-            if (movingController == null) return;
-
             if (remainingTime <= 0 || hit)
             {
                 remainingTime = (mean + UnityEngine.Random.Range(-dev, dev)) * 1000;
@@ -54,7 +43,7 @@ namespace Assets.Code.Components.AI
                 timeStamp = now;
             }
 
-            movingController.Move(currentVector);
+            InputReceived(this, new Vector2EventArgs(currentVector));
         }
     }
 }

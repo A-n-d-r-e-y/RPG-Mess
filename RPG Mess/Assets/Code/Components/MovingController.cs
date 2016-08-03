@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Assets.Scripts.Extensions;
 using System;
 using Assets.Code.Common;
+using Assets.Code.Common.Extensions;
 
 namespace Assets.Code.Components
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(BaseInputReceiver))]
     public class MovingController : MonoBehaviour
     {
 
@@ -20,9 +21,12 @@ namespace Assets.Code.Components
 
         // private variables
         private Animator animator;
+        private BoxCollider2D boxCollider;
+        private BaseInputReceiver inputReceiver;
+
         private MovementState movementState;
         private FacingState facingState;
-        private BoxCollider2D boxCollider;
+
 
         // UI variables
         [SerializeField]
@@ -38,6 +42,7 @@ namespace Assets.Code.Components
         {
             animator = this.GetComponent<Animator>();
             boxCollider = this.GetComponent<BoxCollider2D>();
+            inputReceiver = this.GetComponent<BaseInputReceiver>();
         }
 
         // Use this for initialization
@@ -45,15 +50,22 @@ namespace Assets.Code.Components
         {
             movementState = MovementState.Standing;
             facingState = FacingState.Direct;
+
+            inputReceiver.InputReceived += InputReceiver_InputReceived;
         }
 
-        public void Move(Vector2 dV)
+        private void InputReceiver_InputReceived(object sender, Vector2EventArgs e)
+        {
+            Move(e.Current);
+        }
+
+        private void Move(Vector2 dV)
         {
 
             // in order to implement sliding along the walls we need to split one diaginal
             // movement into two independent X and Y projections and handle them separately.
-            // So, in the case of pressing two keys against the wall, one projction will be
-            // blocked by collision detection but the other will survive and successfully
+            // So, in case of pressing two keys against the wall, one projction will be
+            // blocked by collision detection but the other will "survive" and successfully
             // move the character along the wall
 
             if (Mathf.Abs(dV.x) > 0 && Mathf.Abs(dV.y) > 0)
