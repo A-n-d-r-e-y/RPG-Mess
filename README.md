@@ -1,29 +1,7 @@
-# README #
+# What's done so far #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Main character animation
 
-### What is this repository for? ###
+![little men4](https://cloud.githubusercontent.com/assets/1206629/17456828/eed129e0-5bec-11e6-9423-87b191bc3af7.gif) ![little men](https://cloud.githubusercontent.com/assets/1206629/17456826/eecffaca-5bec-11e6-8183-060dffd95e60.gif)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+![little men2](https://cloud.githubusercontent.com/assets/1206629/17456829/eed3cd30-5bec-11e6-9bc4-0ecd0d067b5f.gif) ![little men3](https://cloud.githubusercontent.com/assets/1206629/17456827/eed0eb60-5bec-11e6-96b7-864016bf10bb.gif)
