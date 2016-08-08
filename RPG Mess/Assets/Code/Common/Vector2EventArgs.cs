@@ -8,11 +8,11 @@ namespace Assets.Code.Common
 {
     public class Vector2EventArgs : EventArgs
     {
-        public Vector2EventArgs(Vector2 current)
+        public Vector2EventArgs(Vector2 vector)
         {
-            this.Current = current;
+            this.Vector2 = vector;
         }
 
-        public Vector2 Current { get; private set; }
+        public Vector2 Vector2 { get; private set; }
     }
 }

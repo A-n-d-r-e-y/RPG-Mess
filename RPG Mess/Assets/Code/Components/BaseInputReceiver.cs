@@ -9,7 +9,9 @@ namespace Assets.Code.Components
 {
     public abstract class BaseInputReceiver : MonoBehaviour
     {
-        public abstract event EventHandler<Vector2EventArgs> InputReceived;
+        public abstract event EventHandler<Vector2EventArgs> MoveInputReceived;
+        public abstract event EventHandler<Vector3EventArgs> FireInputReceived;
+        public abstract event EventHandler<Vector3EventArgs> ArrowInputReceived;
 
         public abstract void Update();
     }

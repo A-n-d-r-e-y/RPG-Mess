@@ -51,12 +51,12 @@ namespace Assets.Code.Components
             movementState = MovementState.Standing;
             facingState = FacingState.Direct;
 
-            inputReceiver.InputReceived += InputReceiver_InputReceived;
+            inputReceiver.MoveInputReceived += InputReceiver_MoveInputReceived;
         }
 
-        private void InputReceiver_InputReceived(object sender, Vector2EventArgs e)
+        private void InputReceiver_MoveInputReceived(object sender, Vector2EventArgs e)
         {
-            Move(e.Current);
+            Move(e.Vector2);
         }
 
         private void Move(Vector2 dV)

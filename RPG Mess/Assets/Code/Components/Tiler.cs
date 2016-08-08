@@ -30,8 +30,11 @@ namespace Assets.Code.Components
                 while (y < verticalTilesCount)
                 {
                     var prefab = prefabTiles[Random.Range(0, prefabTiles.Length - 1)];
-
-                    var instance = UnityEngine.Object.Instantiate(prefab, new Vector2(x, y++), Quaternion.identity) as GameObject;
+                    
+                    var instance = UnityEngine.Object.Instantiate(
+                        prefab, 
+                        new Vector2(x, y++),
+                        Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 3) * 90))) as GameObject;
 
                     //instance.name = "hello";
                     instance.transform.SetParent(this.transform, false);

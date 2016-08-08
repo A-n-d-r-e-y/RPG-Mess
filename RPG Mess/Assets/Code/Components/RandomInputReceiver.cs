@@ -21,7 +21,9 @@ namespace Assets.Code.Components
         [SerializeField]
         float dev = 0.3f;
 
-        public override event EventHandler<Vector2EventArgs> InputReceived;
+        public override event EventHandler<Vector2EventArgs> MoveInputReceived;
+        public override event EventHandler<Vector3EventArgs> FireInputReceived;
+        public override event EventHandler<Vector3EventArgs> ArrowInputReceived;
 
         public override void Update()
         {
@@ -43,7 +45,7 @@ namespace Assets.Code.Components
                 timeStamp = now;
             }
 
-            InputReceived(this, new Vector2EventArgs(currentVector));
+            MoveInputReceived(this, new Vector2EventArgs(currentVector));
         }
     }
 }
