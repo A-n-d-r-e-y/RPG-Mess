@@ -5,7 +5,7 @@ using System.Text;
 using Assets.Code.Common;
 using UnityEngine;
 
-namespace Assets.Code.Components
+namespace Assets.Code.Components.InputReceivers
 {
     public class RandomInputReceiver : BaseInputReceiver
     {

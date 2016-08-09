@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using Assets.Code.Common;
 using Assets.Code.Common.Extensions;
+using Assets.Code.Components.InputReceivers;
 
 namespace Assets.Code.Components
 {

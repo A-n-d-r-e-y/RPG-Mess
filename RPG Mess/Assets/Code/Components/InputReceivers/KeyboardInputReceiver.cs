@@ -4,7 +4,7 @@ using Assets.Code.Components;
 using System;
 using Assets.Code.Common;
 
-namespace Assets.Code.Components
+namespace Assets.Code.Components.InputReceivers
 {
     public class KeyboardInputReceiver : BaseInputReceiver
     {
@@ -13,9 +13,6 @@ namespace Assets.Code.Components
         public override event EventHandler<Vector3EventArgs> ArrowInputReceived;
 
         private bool keyWasPressed = false;
-
-        int delay = 10;
-        int counter = 0;
 
         // Update is called once per frame
         public override void Update()
@@ -45,7 +42,7 @@ namespace Assets.Code.Components
                     if (!keyWasPressed) keyWasPressed = true;
                 }
             }
-            else
+            else // key release
             {
                 if (keyWasPressed && MoveInputReceived != null)
                 {
@@ -64,10 +61,6 @@ namespace Assets.Code.Components
 
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
             {
-                if (counter++ < delay) return;
-
-                counter = 0;
-
                 if (ArrowInputReceived != null)
                 {
                     float dX = 0;
@@ -84,16 +77,6 @@ namespace Assets.Code.Components
                     }
 
                     ArrowInputReceived(this, new Vector3EventArgs(new Vector2(dX, dY).normalized));
-
-                    if (!keyWasPressed) keyWasPressed = true;
-                }
-            }
-            else
-            {
-                if (keyWasPressed && ArrowInputReceived != null)
-                {
-                    ArrowInputReceived(this, new Vector3EventArgs(Vector3.zero));
-                    keyWasPressed = false;
                 }
             }
         }

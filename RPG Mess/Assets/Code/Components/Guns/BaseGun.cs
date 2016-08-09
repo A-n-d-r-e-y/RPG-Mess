@@ -1,11 +1,13 @@
 ﻿using Assets.Code.Common;
+using Assets.Code.Components.InputReceivers;
+using Assets.Code.Components.Projectiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.Code.Components
+namespace Assets.Code.Components.Guns
 {
     [RequireComponent(typeof(BaseInputReceiver))]
     public abstract class BaseGun : MonoBehaviour

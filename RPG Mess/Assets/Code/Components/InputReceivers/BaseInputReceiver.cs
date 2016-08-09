@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.Code.Components
+namespace Assets.Code.Components.InputReceivers
 {
     public abstract class BaseInputReceiver : MonoBehaviour
     {

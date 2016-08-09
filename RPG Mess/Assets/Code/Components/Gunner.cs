@@ -2,6 +2,7 @@
 using System.Collections;
 using Assets.Code.Common;
 using System;
+using Assets.Code.Components.Guns;
 
 namespace Assets.Code.Components
 {
