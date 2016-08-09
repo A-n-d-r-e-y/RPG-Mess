@@ -26,7 +26,10 @@ namespace Assets.Code.Components.Guns
                     transform.position,
                     Quaternion.identity) as BaseProjectile;
 
-                bullet.Launch(mousePositionInWorldPoint, () => UnityEngine.Object.Destroy(bullet.gameObject));
+                var movingController = FindObjectOfType<MovingController>();
+                var speed = movingController == null ? Vector3.zero : movingController.Speed;
+
+                bullet.Launch(mousePositionInWorldPoint, speed, () => UnityEngine.Object.Destroy(bullet.gameObject));
 
                 time_save = DateTime.Now;
             }

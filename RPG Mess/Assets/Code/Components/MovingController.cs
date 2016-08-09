@@ -24,6 +24,8 @@ namespace Assets.Code.Components
         private Animator animator;
         private BoxCollider2D boxCollider;
         private BaseInputReceiver inputReceiver;
+        private bool isRunning = false;
+        private Vector2 lastStep;
 
         private MovementState movementState;
         private FacingState facingState;
@@ -36,6 +38,8 @@ namespace Assets.Code.Components
         private float raycastDistance = 0.6f;
         [SerializeField]
         private LayerMask wallsMask;
+
+        public Vector3 Speed { get { return lastStep; } }
 
         public event EventHandler<GameObjectEventArgs> AfterWallHit;
 
@@ -57,6 +61,7 @@ namespace Assets.Code.Components
 
         private void InputReceiver_MoveInputReceived(object sender, Vector2EventArgs e)
         {
+            isRunning = !(e.Vector2 == Vector2.zero); 
             Move(e.Vector2);
         }
 
@@ -86,6 +91,8 @@ namespace Assets.Code.Components
         {
             dV = dV * speed;
             dV = dV.ApplyDeltaTime();
+
+            lastStep = dV;
 
             //var newPosition = (Vector2)boxCollider.transform.position + dV;
             var newPosition = (Vector2)transform.TransformPoint(boxCollider.offset) + dV;
