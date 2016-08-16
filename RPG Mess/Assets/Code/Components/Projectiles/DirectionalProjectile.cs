@@ -12,7 +12,14 @@ namespace Assets.Code.Components.Projectiles
     {
         public override void Launch(Vector3 direction, Vector3 speed, Action callback)
         {
+            // we should rotate the lazer sprite along shot direction
+            float angle = Vector3.Angle(direction, Vector3.right);
+            // since angle is non reflex we should invert angle if y is negative
+            angle = Mathf.Sign(direction.y) * angle;
+            transform.Rotate(Vector3.forward, angle);
 
+            // AND we should rotate the direction itself, but vice versa
+            direction = Quaternion.Euler(0, 0, -angle) * direction;
             StartCoroutine(MovingTowards(direction, 0.2f, speed, callback));
 
         }
