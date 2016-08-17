@@ -101,13 +101,17 @@ namespace Assets.Code.Components
             var wallHit = Physics2D.BoxCast(newPosition, boxCollider.size, boxCastingAngle, newFacingState.ToVector2(), raycastDistance, wallsMask);
             //var hit = Physics2D.CircleCast(newPosition, circleRadius, newFacingState.ToVector2(), raycastDistance, wallsMask);
             //var hit = Physics2D.Raycast(newPosition, newFacingState.ToVector2(), raycastDistance, wallsMask);
+
+            // no wall ahead
             if (wallHit.collider == null)
             {
                 transform.Translate(dV);
                 facingState = newFacingState;
 
-                animator.SetInteger("facingState", (int)facingState);
+                if (animator.runtimeAnimatorController != null)
+                    animator.SetInteger("facingState", (int)facingState);
 
+                // why this event is triggering here?
                 OnAfterWallHit(new GameObjectEventArgs(gameObject));
             }
         }

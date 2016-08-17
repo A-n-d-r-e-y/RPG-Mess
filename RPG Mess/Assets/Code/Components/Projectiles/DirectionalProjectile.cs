@@ -10,8 +10,14 @@ namespace Assets.Code.Components.Projectiles
 {
     public class DirectionalProjectile : BaseProjectile
     {
-        public override void Launch(Vector3 direction, Vector3 speed, Action callback)
+        [SerializeField]
+        private float distance = 10f;
+        [SerializeField]
+        private float projectileSpeed = 1;
+
+        public override void Launch(Vector3 direction, Action callback)
         {
+            float step = projectileSpeed;
             // we should rotate the lazer sprite along shot direction
             float angle = Vector3.Angle(direction, Vector3.right);
             // since angle is non reflex we should invert angle if y is negative
@@ -20,23 +26,48 @@ namespace Assets.Code.Components.Projectiles
 
             // AND we should rotate the direction itself, but vice versa
             direction = Quaternion.Euler(0, 0, -angle) * direction;
-            StartCoroutine(MovingTowards(direction, 0.2f, speed, callback));
+            //StartCoroutine(MovingTowards(direction, step, callback));
+
+            this.direction = direction;
+            this.step = step;
+            this.callback = callback;
+            launched = true;
 
         }
 
-        IEnumerator MovingTowards(Vector3 direction, float step, Vector3 speed, Action callback)
+        Vector3 direction;
+        float step;
+        Action callback;
+        bool launched = false;
+
+        void Update()
         {
-            float distance = 10f;
+            if (!launched) return;
 
-            do
+            float localStep = step * Time.deltaTime;
+
+            if (distance >= localStep)
             {
-                distance -= step;
-                transform.Translate((direction + speed) * step);
-                yield return new WaitForFixedUpdate();
+                distance -= localStep;
+                //TODO -> speed addition is wrong. it deflects direction
+                transform.Translate(direction * localStep);
 
-            } while (distance > 0.2);
-
-            if (callback != null) callback();
+            }
+            else if (callback != null) callback();
         }
+
+        //IEnumerator MovingTowards(Vector3 direction, float step, Action callback)
+        //{
+        //    do
+        //    {
+        //        distance -= step;
+        //        //TODO -> speed addition is wrong. it deflects direction
+        //        transform.Translate(direction * step);
+        //        yield return new WaitForFixedUpdate();
+
+        //    } while (distance >= step);
+
+        //    if (callback != null) callback();
+        //}
     }
 }

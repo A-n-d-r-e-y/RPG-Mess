@@ -8,6 +8,6 @@ namespace Assets.Code.Components.Projectiles
 {
     public abstract class BaseProjectile : MonoBehaviour
     {
-        public abstract void Launch(Vector3 destinationPoint, Vector3 speed, Action callback);
+        public abstract void Launch(Vector3 destinationPoint, Action callback);
     }
 }

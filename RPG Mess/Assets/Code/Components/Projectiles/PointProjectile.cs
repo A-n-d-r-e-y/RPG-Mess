@@ -10,14 +10,14 @@ namespace Assets.Code.Components.Projectiles
 {
     public class PointProjectile : BaseProjectile
     {
-        public override void Launch(Vector3 destinationPoint, Vector3 speed, Action callback)
+        public override void Launch(Vector3 destinationPoint, Action callback)
         {
 
-            StartCoroutine(MovingTowards(destinationPoint, 0.1f, speed, callback));
+            StartCoroutine(MovingTowards(destinationPoint, 0.1f, callback));
 
         }
 
-        IEnumerator MovingTowards(Vector3 destinationPoint, float step, Vector3 speed, Action callback)
+        IEnumerator MovingTowards(Vector3 destinationPoint, float step, Action callback)
         {
             Vector3 direction;
             float distance = 0.0f;
@@ -26,7 +26,7 @@ namespace Assets.Code.Components.Projectiles
             {
                 direction = destinationPoint - transform.position;
                 distance = direction.magnitude;
-                transform.Translate((direction.normalized + speed) * step);
+                transform.Translate(direction.normalized * step);
                 yield return new WaitForFixedUpdate();
 
             } while (distance > 0.2);

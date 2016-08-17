@@ -20,7 +20,7 @@ namespace Assets.Code.Components.Guns
                 transform.position,
                 Quaternion.identity) as BaseProjectile;
             
-            bullet.Launch(mousePositionInWorldPoint, Vector3.zero, () => UnityEngine.Object.Destroy(bullet.gameObject));
+            bullet.Launch(mousePositionInWorldPoint, () => UnityEngine.Object.Destroy(bullet.gameObject));
         }
 
         private void Start()

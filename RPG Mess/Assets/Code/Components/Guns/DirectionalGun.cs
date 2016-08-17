@@ -11,10 +11,12 @@ namespace Assets.Code.Components.Guns
     public class DirectionalGun : BaseGun
     {
         private DateTime time_save = DateTime.Now;
-        private double delay_ms = 200;
+        [SerializeField]
+        private double firingRate = 5;
 
         protected override void Fire(Vector3 targetVector)
         {
+            double delay_ms = 1000 / firingRate;
             if (time_save.AddMilliseconds(delay_ms) <= DateTime.Now)
             {
                 var mousePositionInWorldPoint = new Vector3(targetVector.x, targetVector.y, 0);
@@ -26,10 +28,7 @@ namespace Assets.Code.Components.Guns
                     transform.position,
                     Quaternion.identity) as BaseProjectile;
 
-                var movingController = FindObjectOfType<MovingController>();
-                var speed = movingController == null ? Vector3.zero : movingController.Speed;
-
-                bullet.Launch(mousePositionInWorldPoint, speed, () => UnityEngine.Object.Destroy(bullet.gameObject));
+                bullet.Launch(mousePositionInWorldPoint, () => UnityEngine.Object.Destroy(bullet.gameObject));
 
                 time_save = DateTime.Now;
             }
