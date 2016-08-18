@@ -13,11 +13,15 @@ namespace Assets.Code.Components.Projectiles
         [SerializeField]
         private float distance = 10f;
         [SerializeField]
-        private float projectileSpeed = 1;
+        private float projectileSpeed = 10;
+
+        Vector3 direction;
+        Action callback;
+        bool launched = false;
+        float remainingDistance;
 
         public override void Launch(Vector3 direction, Action callback)
         {
-            float step = projectileSpeed;
             // we should rotate the lazer sprite along shot direction
             float angle = Vector3.Angle(direction, Vector3.right);
             // since angle is non reflex we should invert angle if y is negative
@@ -26,34 +30,46 @@ namespace Assets.Code.Components.Projectiles
 
             // AND we should rotate the direction itself, but vice versa
             direction = Quaternion.Euler(0, 0, -angle) * direction;
-            //StartCoroutine(MovingTowards(direction, step, callback));
 
             this.direction = direction;
-            this.step = step;
             this.callback = callback;
-            launched = true;
+            this.remainingDistance = distance;
+            this.launched = true;
 
         }
-
-        Vector3 direction;
-        float step;
-        Action callback;
-        bool launched = false;
 
         void Update()
         {
             if (!launched) return;
 
-            float localStep = step * Time.deltaTime;
+            float step = projectileSpeed * Time.deltaTime;
 
-            if (distance >= localStep)
+            if (remainingDistance >= step)
             {
-                distance -= localStep;
-                //TODO -> speed addition is wrong. it deflects direction
-                transform.Translate(direction * localStep);
+                // check for hit
+                var hit = Physics2D.Raycast(transform.position, direction, step, targetMask);
+                if (hit.collider != null)
+                {
+                    EndOfThePath();
+                    return;
+                }
+
+                //var wallHit = Physics2D.BoxCast(newPosition, boxCollider.size, boxCastingAngle, newFacingState.ToVector2(), raycastDistance, wallsMask);
+
+                remainingDistance -= step;
+                transform.Translate(direction * step);
 
             }
-            else if (callback != null) callback();
+            else
+            {
+                EndOfThePath();
+            }
+        }
+
+        private void EndOfThePath()
+        {
+            launched = false;
+            if (callback != null) callback();
         }
 
         //IEnumerator MovingTowards(Vector3 direction, float step, Action callback)
