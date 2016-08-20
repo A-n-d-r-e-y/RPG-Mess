@@ -15,10 +15,11 @@ namespace Assets.Code.Components.Projectiles
         [SerializeField]
         private float projectileSpeed = 10;
 
-        Vector3 direction;
-        Action callback;
-        bool launched = false;
-        float remainingDistance;
+        private Animator animator;
+        private Vector3 direction;
+        private Action callback;
+        private bool launched = false;
+        private float remainingDistance;
 
         public override void Launch(Vector3 direction, Action callback)
         {
@@ -38,6 +39,11 @@ namespace Assets.Code.Components.Projectiles
 
         }
 
+        void Awake()
+        {
+            animator = this.GetComponent<Animator>();
+        }
+
         void Update()
         {
             if (!launched) return;
@@ -50,6 +56,13 @@ namespace Assets.Code.Components.Projectiles
                 var hit = Physics2D.Raycast(transform.position, direction, step, targetMask);
                 if (hit.collider != null)
                 {
+                    var targetHitReceiver = hit.collider.gameObject.GetComponent<BaseHitReceiver>();
+                    if (targetHitReceiver != null)
+                    {
+                        if (animator != null) animator.SetTrigger("hit");
+                        targetHitReceiver.ReceiveHit();
+                    }
+
                     EndOfThePath();
                     return;
                 }
