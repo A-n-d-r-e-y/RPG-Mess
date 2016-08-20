@@ -102,7 +102,13 @@ namespace Assets.Code.Components
             //var hit = Physics2D.CircleCast(newPosition, circleRadius, newFacingState.ToVector2(), raycastDistance, wallsMask);
             //var hit = Physics2D.Raycast(newPosition, newFacingState.ToVector2(), raycastDistance, wallsMask);
 
-            // no wall ahead
+            var hitCaster = GetComponent<HitCaster>();
+            if (hitCaster != null)
+            {
+                hitCaster.CastHitIfNeeded(newFacingState.ToVector2());
+            }
+
+                // no wall ahead
             if (wallHit.collider == null)
             {
                 transform.Translate(dV);

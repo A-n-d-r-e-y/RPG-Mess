@@ -12,9 +12,6 @@ namespace Assets.Code.Components
         [SerializeField]
         private BaseGun gun;
 
-        [SerializeField]
-        private LayerMask enemyMask;
-
         // private variables
         private Animator animator;
 

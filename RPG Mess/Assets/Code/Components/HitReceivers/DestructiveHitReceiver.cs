@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Code.Components.HitReceivers
 {
-    class SimpleHitReceiver : BaseHitReceiver
+    class DestructiveHitReceiver : BaseHitReceiver
     {
         public override void ReceiveHit()
         {
