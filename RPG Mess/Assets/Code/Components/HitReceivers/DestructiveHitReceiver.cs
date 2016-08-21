@@ -9,7 +9,13 @@ namespace Assets.Code.Components.HitReceivers
     {
         public override void ReceiveHit()
         {
-            UnityEngine.Object.Destroy(this.gameObject);
+            var obj = this.gameObject;
+
+            var restarter = obj.GetComponent<GameRestarter>();
+            if (restarter != null) restarter.RestartTheGame();
+
+            UnityEngine.Object.Destroy(obj);
+
         }
     }
 }
