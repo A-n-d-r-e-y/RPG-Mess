@@ -28,6 +28,8 @@ namespace Assets.Code.Components.Guns
                     transform.position,
                     Quaternion.identity) as BaseProjectile;
 
+                bullet.transform.SetParent(this.transform);
+
                 bullet.Launch(mousePositionInWorldPoint, () => UnityEngine.Object.Destroy(bullet.gameObject));
 
                 time_save = DateTime.Now;

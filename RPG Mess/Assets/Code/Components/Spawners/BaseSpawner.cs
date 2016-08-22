@@ -12,17 +12,20 @@ public class BaseSpawner : MonoBehaviour
 
     protected virtual void Spawn()
     {
-        if (counter < maxCount)
+        if (prefabToSpawn != null)
         {
-            var instance = UnityEngine.GameObject.Instantiate(
-            prefabToSpawn,
-            transform.position,
-            Quaternion.identity) as SpawnObject;
+            if (counter < maxCount)
+            {
+                var instance = UnityEngine.GameObject.Instantiate(
+                prefabToSpawn,
+                transform.position,
+                Quaternion.identity) as SpawnObject;
 
-            instance.OnSpawnObjectDestroy += (s, e) => --counter;
+                instance.OnSpawnObjectDestroy += (s, e) => --counter;
 
-            instance.transform.SetParent(this.gameObject.transform);
-            ++counter;
+                instance.transform.SetParent(this.gameObject.transform);
+                ++counter;
+            }
         }
     }
 

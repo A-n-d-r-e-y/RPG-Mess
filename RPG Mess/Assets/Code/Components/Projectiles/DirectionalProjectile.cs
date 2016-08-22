@@ -51,6 +51,12 @@ namespace Assets.Code.Components.Projectiles
                 {
                     if (hitCaster.CastHitIfNeeded(direction))
                     {
+                        var hitCollector = GetComponentInParent<HitInfoCollector>();
+                        if (hitCollector != null)
+                        {
+                            hitCollector.CollectHit();
+                        }
+
                         EndOfThePath();
                         return;
                     }
