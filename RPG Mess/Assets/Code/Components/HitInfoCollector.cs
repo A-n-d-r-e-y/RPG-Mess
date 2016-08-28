@@ -3,19 +3,34 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using Assets.Code.Components.Guns;
 using UnityEngine.UI;
+using System;
 
 public class HitInfoCollector : MonoBehaviour
 {
+    private Text textDisplay;
+
+    void Start()
+    {
+        var root = this.GetComponentInParent<Root>();
+        if (root != null) textDisplay = root.GetComponentInChildren<Text>();
+    }
+
     public void CollectHit()
     {
-        //var root = GameObject.FindGameObjectWithTag("Canvas").GetComponentInChildren<Text>().gameObject;
-        var text = this.GetComponentInParent<Root>().GetComponentInChildren<Text>();
-        if (text != null)
+        if (textDisplay != null)
         {
-            //ExecuteEvents.ExecuteHierarchy<IHitEventHandler>(root, null, (x, y) => x.Hit());
-
-            int hitCounter = int.Parse(text.text);
-            text.text = (++hitCounter).ToString();
+            IncrementHitCounter();
         }
+    }
+
+    private void IncrementHitCounter()
+    {
+        int hitCounter = int.Parse(textDisplay.text);
+        textDisplay.text = (++hitCounter).ToString();
+    }
+
+    public void Reset()
+    {
+        textDisplay.text = "0";
     }
 }

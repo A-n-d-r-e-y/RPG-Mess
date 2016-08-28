@@ -31,8 +31,15 @@ public class HitCaster : MonoBehaviour
         if (successfulHit)
         {
             var targetHitReceiver = hit.collider.gameObject.GetComponent<BaseHitReceiver>();
+            // hit is successful and target can recieve the hit
             if (targetHitReceiver != null)
             {
+                var hitCollector = GetComponentInParent<HitInfoCollector>();
+                if (hitCollector != null)
+                {
+                    hitCollector.CollectHit();
+                }
+
                 if (animator != null) animator.SetTrigger("hit");
                 targetHitReceiver.ReceiveHit();
             }
