@@ -40,7 +40,7 @@ public class HitCaster : MonoBehaviour
                     hitCollector.CollectHit();
                 }
 
-                if (animator != null) animator.SetTrigger("hit");
+                //if (animator != null) animator.SetTrigger("hit");
                 targetHitReceiver.ReceiveHit();
             }
         }

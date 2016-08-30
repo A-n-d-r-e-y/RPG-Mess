@@ -14,7 +14,8 @@ namespace Assets.Code.Components.HitReceivers
             var restarter = obj.GetComponent<GameRestarter>();
             if (restarter != null) restarter.RestartTheGame();
 
-            UnityEngine.Object.Destroy(obj);
+            base.ReceiveHit();
+            UnityEngine.Object.Destroy(obj, 0.5f);
 
         }
     }

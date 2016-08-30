@@ -24,7 +24,7 @@ namespace Assets.Code.Components
         private Animator animator;
         private BoxCollider2D boxCollider;
         private BaseInputReceiver inputReceiver;
-        private bool isRunning = false;
+        //private bool isRunning = false;
         private Vector2 lastStep;
 
         private MovementState movementState;
@@ -40,6 +40,7 @@ namespace Assets.Code.Components
         private LayerMask wallsMask;
 
         public Vector3 Speed { get { return lastStep; } }
+        //public bool IsBlocked { get; set; } 
 
         public event EventHandler<GameObjectEventArgs> AfterWallHit;
 
@@ -48,6 +49,7 @@ namespace Assets.Code.Components
             animator = this.GetComponent<Animator>();
             boxCollider = this.GetComponent<BoxCollider2D>();
             inputReceiver = this.GetComponent<BaseInputReceiver>();
+            //IsBlocked = false;
         }
 
         // Use this for initialization
@@ -61,8 +63,11 @@ namespace Assets.Code.Components
 
         private void InputReceiver_MoveInputReceived(object sender, Vector2EventArgs e)
         {
-            isRunning = !(e.Vector2 == Vector2.zero); 
-            Move(e.Vector2);
+            //if (!IsBlocked)
+            {
+                //isRunning = !(e.Vector2 == Vector2.zero);
+                Move(e.Vector2);
+            }
         }
 
         private void Move(Vector2 dV)
@@ -114,6 +119,7 @@ namespace Assets.Code.Components
                 transform.Translate(dV);
                 facingState = newFacingState;
 
+                //Debug.Log("facingState");
                 if (animator.runtimeAnimatorController != null)
                     animator.SetInteger("facingState", (int)facingState);
 
